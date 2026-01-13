@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchForm from './components/SearchForm';
 import NewsCard from './components/NewsCard';
 import { NewsAPIService } from './services/newsApi';
@@ -10,9 +10,37 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [totalResults, setTotalResults] = useState(0);
-  const [hasSearched, setHasSearched] = useState(false);
 
   const apiKey = import.meta.env.VITE_NEWS_API_KEY;
+
+  useEffect(() => {
+    const loadTopHeadlines = async () => {
+      if (!apiKey) {
+        setError(
+          'API key is not configured. Please add your NewsAPI key to the .env file.'
+        );
+        return;
+      }
+
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const newsService = new NewsAPIService(apiKey);
+        const response = await newsService.getTopHeadlines('us');
+        setArticles(response.articles);
+        setTotalResults(response.totalResults);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : 'An error occurred while fetching news'
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadTopHeadlines();
+  }, [apiKey]);
 
   const handleSearch = async (filters: SearchFilters) => {
     if (!apiKey) {
@@ -24,7 +52,6 @@ function App() {
 
     setIsLoading(true);
     setError(null);
-    setHasSearched(true);
 
     try {
       const newsService = new NewsAPIService(apiKey);
@@ -70,7 +97,7 @@ function App() {
             </div>
           )}
 
-          {!isLoading && hasSearched && articles.length > 0 && (
+          {!isLoading && articles.length > 0 && (
             <>
               <div className="results-header">
                 <h2>
@@ -90,19 +117,9 @@ function App() {
             </>
           )}
 
-          {!isLoading && hasSearched && articles.length === 0 && !error && (
+          {!isLoading && articles.length === 0 && !error && (
             <div className="no-results">
               <p>No articles found. Try adjusting your search criteria.</p>
-            </div>
-          )}
-
-          {!hasSearched && !isLoading && (
-            <div className="welcome-message">
-              <h2>Welcome to NewsAPI Explorer</h2>
-              <p>
-                Search for news articles using keywords, filter by date, source,
-                and language to discover the latest stories from around the world.
-              </p>
             </div>
           )}
         </div>
