@@ -11,7 +11,6 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
     keyword: '',
     fromDate: '',
     toDate: '',
-    source: '',
     language: 'en',
     sortBy: 'publishedAt',
   });
@@ -70,18 +69,6 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
       </div>
 
       <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="source">Source Domain</label>
-          <input
-            type="text"
-            id="source"
-            name="source"
-            value={filters.source}
-            onChange={handleChange}
-            placeholder="e.g., thenextweb.com"
-          />
-        </div>
-
         <div className="form-group">
           <label htmlFor="language">Language</label>
           <select

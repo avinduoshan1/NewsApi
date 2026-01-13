@@ -25,10 +25,6 @@ export class NewsAPIService {
       params.append('to', filters.toDate);
     }
 
-    if (filters.source) {
-      params.append('domains', filters.source);
-    }
-
     const response = await fetch(`${BASE_URL}/everything?${params.toString()}`);
 
     if (!response.ok) {

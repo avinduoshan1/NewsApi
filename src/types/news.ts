@@ -22,7 +22,6 @@ export interface SearchFilters {
   keyword: string;
   fromDate: string;
   toDate: string;
-  source: string;
   language: string;
   sortBy: 'relevancy' | 'popularity' | 'publishedAt';
 }
