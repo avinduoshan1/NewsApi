@@ -47,10 +47,14 @@ body {
 }
 
 .app-header {
-  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  background: linear-gradient(rgba(30, 64, 175, 0.7), rgba(37, 99, 235, 0.7)), url('/image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   padding: 3rem 0;
   box-shadow: var(--shadow-md);
+  text-align: center;
 }
 
 .app-title {
@@ -58,12 +62,14 @@ body {
   font-weight: 700;
   margin-bottom: 0.5rem;
   letter-spacing: -0.025em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .app-subtitle {
   font-size: 1.125rem;
   opacity: 0.9;
   font-weight: 400;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .app-main {
