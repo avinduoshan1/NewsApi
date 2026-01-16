@@ -88,6 +88,7 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
             <option value="no">Norwegian</option>
             <option value="pt">Portuguese</option>
             <option value="ru">Russian</option>
+            <option value="si">Sinhala</option>
             <option value="sv">Swedish</option>
             <option value="zh">Chinese</option>
           </select>
