@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import SearchForm from './components/SearchForm';
 import NewsCard from './components/NewsCard';
+import NewsSection from './components/NewsSection';
 import { NewsAPIService } from './services/newsApi';
 import type { NewsArticle, SearchFilters } from './types/news';
 import './App.css';
@@ -82,6 +83,8 @@ function App() {
 
       <main className="app-main">
         <div className="container">
+          <NewsSection />
+
           <SearchForm onSearch={handleSearch} isLoading={isLoading} />
 
           {error && (
